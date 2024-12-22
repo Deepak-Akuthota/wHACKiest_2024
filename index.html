@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+   
+<head>
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connectify!</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="react file.js"></script>
+    <link rel="icon" type="image/png" href="android-chrome-512x512.png">
+</head>
+<body class="bg-gray-50 text-gray-900">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-purple-600 to-blue-500 text-white py-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <h1 class="text-2xl font-bold">Connectify:Connect,Collaborate,Co-live</h1>
+            <nav>
+                <a href="#features" class="mx-2 hover:underline">Features</a>
+                <a href="#about" class="mx-2 hover:underline">About</a>
+                <a href="#signup" class="mx-2 hover:underline">Sign Up</a>
+                <a href="explore.html" class="mx-2 hover:underline">Explore</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-16">
+        <div class="container mx-auto text-center px-4">
+            <h2 class="text-5xl font-bold mb-4">Connect Meaningfully in Urban Communities</h2>
+            <p class="text-lg mb-6">Find companions for events, fitness, cohabitation, and more using AI-powered suggestions.</p>
+            <a href="explore.html" class="bg-white text-blue-500 px-8 py-4 rounded-full font-semibold shadow-md hover:bg-gray-200">Find Your Partner Now</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h3 class="text-4xl font-bold text-center mb-8">Our Features</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="text-2xl font-bold mb-2">Sports Partner</h4>
+                    <p>Find someone to motivate you and achieve your fitness goals together.</p>
+                    <a href="gym-partner.html" class="text-blue-500 hover:underline">Learn More</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="text-2xl font-bold mb-2">Flatmate Search</h4>
+                    <p>Connect with like-minded individuals for cohabitation.</p>
+                    <a href="flatmate.html" class="text-blue-500 hover:underline">Learn More</a>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <h4 class="text-2xl font-bold mb-2">Event Partner</h4>
+                    <p>Join someone for events and make the experience memorable.</p>
+                    <a href="event-partner.html" class="text-blue-500 hover:underline">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section id="map" class="py-16 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-4xl font-bold mb-4">Find Activities Near You</h3>
+            <p class="text-lg mb-6">100 people in your area are looking for gym partners. Sign up to connect!</p>
+            <div class="w-full flex justify-center">
+                <div id="map" class="w-2/3 h-80 rounded-lg shadow-lg"></div>
+            </div>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const map = L.map('map', {
+                    scrollWheelZoom: false
+                }).setView([37.7749, -122.4194], 12); // Default location: San Francisco
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                L.marker([37.7749, -122.4194]).addTo(map)
+                    .bindPopup('San Francisco')
+                    .openPopup();
+
+                map.on('click', function () {
+                    map.scrollWheelZoom.enable();
+                });
+            });
+        </script>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-4xl font-bold mb-4">About Connectify</h3>
+            <p class="text-lg mb-4">Connecting like-minded people for activities, events, and shared living—find your perfect match on Connectify!</p>
+            <p class="text-lg">We aim to address social isolation in rapidly growing cities by enabling users to find like-minded companions for shared activities and cohabitation.</p>
+        </div>
+    </section>
+
+    <!-- Sign-Up Section -->
+    <section id="signup" class="py-16 bg-gradient-to-r from-purple-600 to-blue-500 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-4xl font-bold mb-4">Join Connectify Today</h3>
+            <p class="text-lg mb-6">Sign up to explore and connect with like-minded individuals in your area.</p>
+            <form id="signupForm" class="max-w-lg mx-auto">
+                <input type="text" id="name" placeholder="Your Name" class="w-full mb-4 p-3 rounded-lg bg-white text-gray-800" required>
+                <input type="email" id="email" placeholder="Your Email" class="w-full mb-4 p-3 rounded-lg bg-white text-gray-800" required>
+                <input type="password" id="password" placeholder="Your Password" class="w-full mb-4 p-3 rounded-lg bg-white text-gray-800" required>
+                <button type="submit" class="w-full bg-white text-purple-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Sign Up</button>
+            </form>
+            <p id="successMessage" class="text-lg mt-4 hidden">Thank you for signing up!</p>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form from refreshing the page
+            document.getElementById('successMessage').classList.remove('hidden');
+            document.getElementById('signupForm').reset(); // Reset the form fields
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Connectify. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
