@@ -29,3 +29,5 @@ Code catalysts
 ### Backend:
 - **Python**: Used to handle the backend logic, including user management, matchmaking, and data processing.
 - **SQL**: Structured query language for database management and storage of user data, including interests, location, and other preferences.
+
+<img src="C:\Users\deepa\Desktop\New folder (3)\WhatsApp Image 2024-12-22 at 15.49.23_6289e2ee.jpg">
