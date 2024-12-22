@@ -1,0 +1,140 @@
+import React, { useState } from 'react';
+import { Search, Users, Home, Dumbbell, Calendar, MapPin, ChevronRight, Bell } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+
+const ActivityPartnerPlatform = () => {
+  const [activeCategory, setActiveCategory] = useState('all');
+  
+  const categories = [
+    { id: 'roommates', icon: Home, label: 'Find Roommates' },
+    { id: 'gym', icon: Dumbbell, label: 'Gym Partners' },
+    { id: 'hackathons', icon: Users, label: 'Hackathon Teams' },
+    { id: 'events', icon: Calendar, label: 'Event Buddies' }
+  ];
+
+  const sampleListings = [
+    {
+      id: 1,
+      type: 'roommates',
+      title: "Looking for roommate near MS Ramaiah",
+      location: "Mathikere, Bangalore",
+      tags: ["Student", "Working Professional", "Pet Friendly"],
+      posted: "2 days ago",
+      matches: "85% match"
+    },
+    {
+      id: 2,
+      type: 'gym',
+      title: "Morning Gym Partner Needed",
+      location: "Cult Fit, Malleshwaram",
+      tags: ["6AM-8AM", "Weight Training", "Beginner Friendly"],
+      posted: "1 day ago",
+      matches: "92% match"
+    },
+    {
+      id: 3,
+      type: 'hackathons',
+      title: "Looking for Frontend Developer for wHACKiest",
+      location: "MS Ramaiah Institute of Technology",
+      tags: ["React", "UI/UX", "24hr Hackathon"],
+      posted: "5 hours ago",
+      matches: "78% match"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Navigation Bar */}
+      <nav className="bg-white shadow-sm p-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="text-2xl font-bold text-blue-600">ConnectMe</div>
+          <div className="flex items-center space-x-6">
+            <button className="p-2 hover:bg-gray-100 rounded-full">
+              <Bell size={20} />
+            </button>
+            <div className="w-10 h-10 bg-gray-200 rounded-full" />
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto p-6">
+        {/* Search Section */}
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold mb-4">Find Your Perfect Match</h1>
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search for partners, events, or locations..."
+              className="w-full p-4 pr-12 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <Search className="absolute right-4 top-4 text-gray-400" />
+          </div>
+        </div>
+
+        {/* Categories */}
+        <div className="grid grid-cols-4 gap-4 mb-8">
+          {categories.map(({ id, icon: Icon, label }) => (
+            <Card 
+              key={id}
+              className={`cursor-pointer transition-all ${
+                activeCategory === id ? 'border-blue-500 bg-blue-50' : ''
+              }`}
+              onClick={() => setActiveCategory(id)}
+            >
+              <CardContent className="flex flex-col items-center justify-center p-6">
+                <Icon size={24} className={activeCategory === id ? 'text-blue-500' : 'text-gray-600'} />
+                <span className={`mt-2 font-medium ${activeCategory === id ? 'text-blue-500' : 'text-gray-600'}`}>
+                  {label}
+                </span>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Listings */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {sampleListings
+            .filter(listing => activeCategory === 'all' || listing.type === activeCategory)
+            .map(listing => (
+              <Card key={listing.id} className="hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <h3 className="font-semibold text-lg mb-2">{listing.title}</h3>
+                      <div className="flex items-center text-gray-600 text-sm">
+                        <MapPin size={16} className="mr-1" />
+                        {listing.location}
+                      </div>
+                    </div>
+                    <span className="text-green-500 text-sm font-medium">
+                      {listing.matches}
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {listing.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 bg-gray-100 rounded-full text-sm text-gray-600"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-500">{listing.posted}</span>
+                    <button className="flex items-center text-blue-600 hover:text-blue-700">
+                      Connect
+                      <ChevronRight size={16} className="ml-1" />
+                    </button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ActivityPartnerPlatform;
